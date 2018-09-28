@@ -1,11 +1,37 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
 #title {
+    background-color: #ef5350;
+    height: 90px;
+}
+#titleText {
     font-size: 40px;
     text-align: center;
-    background-color: #ef5350;
-    height: 70px;
+    padding-top: 20px;
 }
 
 #form {
     padding: 10px;
     padding-top: 50px;
 }
+
+#stats {
+    margin-top: 50px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 400px;
+}
+ #giphy {
+    margin-top: 50px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    height: 400px;
+ }
+ #dataContainer {
+     width: 80%;
+ }
