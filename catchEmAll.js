@@ -14,10 +14,13 @@ $(document).ready(function() {
             console.log(data);
             for(i=0;i<data.pokemon_entries.length;i++)
             {
-                pokemonList.push(data.pokemon_entries[i].pokemon_species.name);
+                var lowerPoke = data.pokemon_entries[i].pokemon_species.name;
+                var capPoke = lowerPoke.charAt(0).toUpperCase() + lowerPoke.slice(1);
+                pokemonList.push(capPoke);
             }
             pokemonList.sort();
-            
+
+            autocomplete(document.getElementById("searchField"), pokemonList);
             console.log("Success!!!")
         },
         error:function(data) {

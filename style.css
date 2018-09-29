@@ -34,6 +34,8 @@ body {
     cursor: pointer;
     background-color: #fff; 
     border-bottom: 1px solid #d4d4d4; 
+    max-height: 100px;
+    overflow: auto;
 }
 .autocomplete-items div:hover {
     background-color: #e9e9e9; 
