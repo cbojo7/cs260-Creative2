@@ -67,7 +67,8 @@ body {
     margin-top: 50px;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    height: 400px;
+    height: 500px;
+    width: 850px;
     background-color: #ffffff;
  }
  #dataContainer {
@@ -81,4 +82,8 @@ body {
 		1px -1px 0 #000,
 		-1px 1px 0 #000,
 		1px 1px 0 #000;
+}
+#giphy > iframe {
+    height: 100%;
+    width: 100%;
 }
