@@ -11,7 +11,6 @@ $(document).ready(function() {
     $.ajax ({
         url:pokedexUrl,
         success:function(data){
-            console.log(data);
             for(i=0;i<data.pokemon_entries.length;i++)
             {
                 var lowerPoke = data.pokemon_entries[i].pokemon_species.name;
@@ -27,12 +26,23 @@ $(document).ready(function() {
             console.log("Error in API request.")
         }
     })
-    var output = "<ul>";
-    for(i=1;i<pokemonList.length;i++)
-    {
-        output += "<li>" + pokemonList[i] + "</li>"
-    }
-    output += "</ul>";
-    $("#pokeList").html(output);
-    console.log(pokemonList.length);
+    $("#seachBtn").click(function(e) {
+        e.preventDefault();
+        getGiphy();
+        var searchIndex = $("#searchField").val();
+        searchIndex = searchIndex.charAt(0).toLowerCase() + searchIndex.slice(1);
+        myUrl = "https://pokeapi.co/api/v2/pokemon/" + searchIndex + "/";
+        $.ajax({
+            url:myUrl,
+            success:function(data){
+                var output = "<ul><li>" + data.name + "</li></ul>";
+                $("#stats").html(output);
+                console.log(output);
+                console.log("Got him");
+            },
+            error:function(data) {
+                console.log("Error in API request");
+            }
+        })
+    })
 })
