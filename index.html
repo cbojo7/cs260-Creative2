@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <HTML>
     <head>
+        <title>Pokemon Search</title>
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+<<<<<<< HEAD
         <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="catchEmAll.js"></script>
     </head>
+=======
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="catchEmAll.js"></script>
+        <script src="giphy.js"></script>
+        <script src="dropdownMenu.js"></script>
+>>>>>>> 429e69bff4595bba3e3010bc9b4624fa7d7e0a73
     <body>
         <div class="container-fluid">
             <div row>
                 <div class="col-md-12" id="title">
-                    <h1>Pokemon Browser</h1>
+                    <h1 id="titleText">Pokemon Browser</h1>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12" id="search">
-                    <form id="form">
+                    <form id="form" autocomplete="off">
                         <div class="row">
-                          <div class="col-md-11">
+                          <div class="col-md-11 autocomplete">
                             <input class="form-control form-control-lg" id ="searchField" type="text" placeholder="Search Pokemon">
                           </div>
                           <div class="col-md-1">
@@ -29,11 +38,13 @@
                     </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-5" id="stats">
+        </div>
+        <div class="container-fluid" id="dataContainer">
+            <div class="row" id="data">
+                <div class="col-md-4" id="stats">
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-7" id="giphy">
-
                 </div>
             </div>
         </div>
