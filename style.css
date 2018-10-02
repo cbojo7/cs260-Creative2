@@ -3,6 +3,16 @@ html {
     height: 100%;
     width: 100%;
 }
+
+h1, h2{
+    text-align: center;
+}
+
+.family:hover {
+    color: red;
+    cursor: pointer;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     background-image: url("images/pokebal-background.png");

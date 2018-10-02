@@ -35,22 +35,24 @@ $(document).ready(function() {
             url:myUrl,
             success:function(pokeData){
                 var output = "<h1>" + toCapital(pokeData.name) + "</h1>";
-                output += "<h2>Common Moves:</h2><ul>";
-                for(i=0; i < 3; i++) {
+                output += "<h2># " + pokeData.id + "</h2>";
+                output += "<h4>Common Moves:</h4><ul>";
+                for(i=0; i < 3 && i < pokeData.moves.length; i++) {
                     output += "<li>" + toCapital(pokeData.moves[i].move.name) + "</li>";
-                } 
+                }
+
                 output += "</ul>";
-                output += "<h2>Evolutions:<h2><ul>";
+                output += "<h4>Evolution chain:<h4><ul>";
                 $.ajax ({
                     url: pokeData.species.url,
                     success: function(speciesData) {
                         $.ajax ({
                             url: speciesData.evolution_chain.url,
                             success: function(evolutionData) {
-                                for (i=0; i < evolutionData.chain.evolves_to.length; i++) {
-                                    output += "<li class=\"evolution\" onClick=\"goToPokemon(" + getPokeNumber(evolutionData.chain.evolves_to[i].species.url) + ")\">"
-                                    output += toCapital(evolutionData.chain.evolves_to[i].species.name) + "</li>";
-                                }
+                                var curData = evolutionData.chain;
+                                console.log(output);
+                                output += getEvolutions(curData);
+                                console.log(output);
                                 output += "</ul>";
                                 $("#stats").html(output);
                                 console.log(output);
@@ -73,8 +75,18 @@ $(document).ready(function() {
     })
 })
 
+function getEvolutions(curData) {
+    var output = "<li class=\"family\" onClick=\"goToPokemon(" + getPokeNumber(curData.species.url) + ")\">"
+    output += toCapital(curData.species.name) + "</li>";
+    if (curData.evolves_to.length > 0)
+        for(i=0;i < curData.evolves_to.length; i++)
+            output += getEvolutions(curData.evolves_to[i]);
+    return output;
+}
+
 function getPokeNumber(string) {
-    return 134;
+    var res = string.split("/");
+    return res[6];
 }
 
 function goToPokemon(number) {
