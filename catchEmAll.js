@@ -13,6 +13,8 @@ Aritcuno, Rattata, Charizard, Caterpie
 
 var pokedexUrl="https://pokeapi.co/api/v2/pokedex/1/";
 var pokemonList = [];
+var statList = [10, 10, 10];
+var price = "Select a Pokemon";
 function toCapital(string) {
     return (string.charAt(0).toUpperCase() + string.slice(1));
 }
@@ -105,4 +107,16 @@ function goToPokemon(number) {
             $("#searchBtn").click();
         }
     })
+}
+
+function calcPrice() {
+    if(statList.size == 0) {
+        return;
+    } else {
+        price = 0;
+        for(i=0;i<statList.size;i++) {
+            price += (statList[i] * 0.05);
+        }
+        $("priceTagText").text("$" + price);
+    }
 }

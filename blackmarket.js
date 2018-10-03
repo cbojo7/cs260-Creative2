@@ -19,4 +19,7 @@ $(document).ready(function() {
 function unlockMarket() {
     $("#title").attr("style","background-color:black; color:white");
     $("#titleText").text("Pokémon Black Market");
+    $("#priceTag").attr("style","display:block");
+    $("#priceTagText").text("Select a Pokémon");
+    calcPrice();
 }
