@@ -14,6 +14,7 @@ Aritcuno, Rattata, Charizard, Caterpie, Dragonite
 var pokedexUrl="https://pokeapi.co/api/v2/pokedex/1/";
 var pokemonList = [];
 var statList = [];
+var statName = [];
 var price = "Select a Pokemon";
 function toCapital(string) {
     return (string.charAt(0).toUpperCase() + string.slice(1));
@@ -48,21 +49,39 @@ $(document).ready(function() {
                 for(i=0; i < 3 && i < pokeData.moves.length; i++) {
                     output += "<li>" + toCapital(pokeData.moves[i].move.name) + "</li>";
                 }
-                console.log(pokeData.stats.length);
+                console.log(statName);
+                output += "</ul>";
+
+                //Add the output for the statblock.
                 statList = [];
+                statName = [];
                 for(i=0; i < pokeData.stats.length; i ++) {
                     statList.push(pokeData.stats[i].base_stat);
+                    statName.push(toCapital(pokeData.stats[i].stat.name));
                 }
-                console.log(statList);
-                calcPrice();
+                output += "<h4>Stat Block:</h4><ul> ";
+                for (i=0;i < (pokeData.stats.length); i ++) {
+                    output += "<li>" + statName[i] + " " + statList[i] + "</li>";
+                }
                 output += "</ul>";
-                output += "<h4>Evolution chain:<h4><ul>";
+                calcPrice();
+
+
                 $.ajax ({
                     url: pokeData.species.url,
                     success: function(speciesData) {
+                        output += "<h4>Flavor Text:</h4><ul>";
+                        var arrayer = speciesData.flavor_text_entries;
+                        for(i= arrayer.length - 1; i > 0; i--) {
+                            if(arrayer[i].language.name == "en") {
+                                output += "<li>\"" + arrayer[i].flavor_text + "\" (" + toCapital(arrayer[i].version.name) + ")</li>";
+                            }
+                        }
+                        output += "</ul>";
                         $.ajax ({
                             url: speciesData.evolution_chain.url,
                             success: function(evolutionData) {
+                                output += "<h4>Evolution chain:<h4><ul>";
                                 var curData = evolutionData.chain;
                                 output += getEvolutions(curData);
                                 output += "</ul>";
