@@ -1,19 +1,22 @@
 var openTheMarket = "Locked";
 
-$("#marketKey").click(function(e) {
-    e.preventDefault();
-    openTheMarket = "Key";
+$(document).ready(function() {
+    $("#marketKey").click(function(e) {
+        e.preventDefault();
+        openTheMarket = "Key";
+        console.log("Key inserted");
+    })
+
+    $("#marketUnlock").click(function(e) {
+        e.preventDefault();
+        if (openTheMarket == "Key") {
+            unlockMarket();
+            console.log("Market Unlocked");
+        }
+    })
 })
 
-$("#marketUnlock").click(function(e) {
-    e.preventDefault();
-    if (openTheMarket == "Key") {
-        unlockMarket()
-    }
-})
-
-function unlock() {
-    $("#title").attr("background-color","black");
-    $("#title").attr("color","white");
-    $("#titleText").text("Pokemon Black Market");
+function unlockMarket() {
+    $("#title").attr("style","background-color:black; color:white");
+    $("#titleText").text("Pokémon Black Market");
 }
