@@ -35,8 +35,9 @@ body {
     border-bottom: none;
     border-top: none;
     z-index: 99;
+    width: 98%;
     top: 100%;
-    left: 0;
+    left: 1%;
     right: 0;
 }
 .autocomplete-items div {
