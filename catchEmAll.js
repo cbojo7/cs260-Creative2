@@ -5,7 +5,7 @@
 // <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 /*
 Best Giphys:
-Aritcuno, Rattata, Charizard, Caterpie
+Aritcuno, Rattata, Charizard, Caterpie, Dragonite
 
 
 
@@ -13,7 +13,7 @@ Aritcuno, Rattata, Charizard, Caterpie
 
 var pokedexUrl="https://pokeapi.co/api/v2/pokedex/1/";
 var pokemonList = [];
-var statList = [10, 10, 10];
+var statList = [];
 var price = "Select a Pokemon";
 function toCapital(string) {
     return (string.charAt(0).toUpperCase() + string.slice(1));
@@ -48,7 +48,13 @@ $(document).ready(function() {
                 for(i=0; i < 3 && i < pokeData.moves.length; i++) {
                     output += "<li>" + toCapital(pokeData.moves[i].move.name) + "</li>";
                 }
-
+                console.log(pokeData.stats.length);
+                statList = [];
+                for(i=0; i < pokeData.stats.length; i ++) {
+                    statList.push(pokeData.stats[i].base_stat);
+                }
+                console.log(statList);
+                calcPrice();
                 output += "</ul>";
                 output += "<h4>Evolution chain:<h4><ul>";
                 $.ajax ({
@@ -58,12 +64,9 @@ $(document).ready(function() {
                             url: speciesData.evolution_chain.url,
                             success: function(evolutionData) {
                                 var curData = evolutionData.chain;
-                                console.log(output);
                                 output += getEvolutions(curData);
-                                console.log(output);
                                 output += "</ul>";
                                 $("#stats").html(output);
-                                console.log(output);
                             },
                             error: function (e) {
                                 output+= "<li>Error, evolutions not found.</li></ul>";
@@ -74,7 +77,6 @@ $(document).ready(function() {
                         output+= "<li>Error, evolutions not found.</li></ul>";
                     }
                 })
-                console.log("Got him");
             },
             error:function(data) {
                 console.log("Error in API request");
@@ -110,13 +112,22 @@ function goToPokemon(number) {
 }
 
 function calcPrice() {
-    if(statList.size == 0) {
+    if(statList.length == 0) {
         return;
     } else {
         price = 0;
-        for(i=0;i<statList.size;i++) {
-            price += (statList[i] * 0.05);
+        var number = 0;
+        for(i=0;i<statList.length;i++) {
+            number = number + (statList[i]* 0.05);
         }
-        $("priceTagText").text("$" + price);
+        var USDPrice;
+        var myUrl = "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD";
+        $.ajax({
+            url:myUrl,
+            success: function(data) {
+                USDPrice = Math.round((number * data.USD)* 100) / 100;
+                $("#priceTagText").text(number + " Etherium (" + USDPrice + " USD)");
+            }
+        })
     }
 }

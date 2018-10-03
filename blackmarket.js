@@ -18,8 +18,9 @@ $(document).ready(function() {
 
 function unlockMarket() {
     $("#title").attr("style","background-color:black; color:white");
-    $("#titleText").text("Pokémon Black Market");
+    $("#titleText").text("Team Rocket's Pokémon Black Market");
     $("#priceTag").attr("style","display:block");
     $("#priceTagText").text("Select a Pokémon");
+    $("body").attr("style","background-image: url(\"images/Rocket-img2.png\");background-size: 100%;")
     calcPrice();
 }

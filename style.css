@@ -13,6 +13,15 @@ h1, h2{
     cursor: pointer;
 }
 
+#stats {
+    background-color: white;
+    
+}
+
+#stats li {
+    font-size: 15px;
+}
+
 #marketKey:hover, #marketUnlock:hover {
     color: red;
     cursor: pointer;
