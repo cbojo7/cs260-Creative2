@@ -71,7 +71,7 @@ body {
     margin-top: 50px;
     border: 1px solid #ced4da;
     border-radius: 5px;
-    height: 400px;
+    height: auto;
 }
  #giphy {
     margin-top: 50px;
