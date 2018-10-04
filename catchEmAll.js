@@ -45,12 +45,13 @@ $(document).ready(function() {
             success:function(pokeData){
                 var output = "<h1>" + toCapital(pokeData.name) + "</h1>";
                 output += "<h2># " + pokeData.id + "</h2>";
-                output += "<h4>Common Moves:</h4><ul>";
+                // output += "<h4>Common Moves:</h4><ul>";
+                output += "<button class='collapsible' onclick='collectionButton()'>Common Moves:</button><div class='content'><br><ul>"
                 for(i=0; i < 3 && i < pokeData.moves.length; i++) {
                     output += "<li>" + toCapital(pokeData.moves[i].move.name) + "</li>";
                 }
                 console.log(statName);
-                output += "</ul>";
+                output += "</ul></div>";
 
                 //Add the output for the statblock.
                 statList = [];
@@ -59,32 +60,36 @@ $(document).ready(function() {
                     statList.push(pokeData.stats[i].base_stat);
                     statName.push(toCapital(pokeData.stats[i].stat.name));
                 }
-                output += "<h4>Stat Block:</h4><ul> ";
+                // output += "<h4>Stat Block:</h4><ul> ";
+                output += "<button class='collapsible' onclick='collectionButton()'>Stat Block:</button><div class='content'><br><ul>"
                 for (i=0;i < (pokeData.stats.length); i ++) {
                     output += "<li>" + statName[i] + " " + statList[i] + "</li>";
                 }
-                output += "</ul>";
+                // output += "</ul>";
+                output += "</ul></div>"
                 calcPrice();
 
 
                 $.ajax ({
                     url: pokeData.species.url,
                     success: function(speciesData) {
-                        output += "<h4>Flavor Text:</h4><ul>";
+                        // output += "<h4>Flavor Text:</h4><ul>";
+                        output += "<button class='collapsible' onclick='collectionButton()'>Flavor Text:</button><div class='content'><br><ul>"
                         var arrayer = speciesData.flavor_text_entries;
                         for(i= arrayer.length - 1; i > 0; i--) {
                             if(arrayer[i].language.name == "en") {
                                 output += "<li>\"" + arrayer[i].flavor_text + "\" (" + toCapital(arrayer[i].version.name) + ")</li>";
                             }
                         }
-                        output += "</ul>";
+                        output += "</ul></div>";
                         $.ajax ({
                             url: speciesData.evolution_chain.url,
                             success: function(evolutionData) {
-                                output += "<h4>Evolution chain:<h4><ul>";
+                                // output += "<h4>Evolution chain:<h4><ul>";
+                                output += "<button class='collapsible' onclick='collectionButton()'>Evolution chain:</button><div class='content'><br><ul>"
                                 var curData = evolutionData.chain;
                                 output += getEvolutions(curData);
-                                output += "</ul>";
+                                output += "</ul></div>";
                                 $("#stats").html(output);
                             },
                             error: function (e) {
@@ -148,5 +153,21 @@ function calcPrice() {
                 $("#priceTagText").text(number + " Etherium (" + USDPrice + " USD)");
             }
         })
+    }
+}
+function collectionButton() {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } 
+      });
     }
 }

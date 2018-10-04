@@ -4,8 +4,6 @@ function getGiphy() {
         var i = 0;
         // var pokeName = $("#searchField").val()
         // if (pokeName.toLowerCase() == "vaporeon") {i=2;}
-        console.log(i);
-        console.log(data.data[i].embed_url)
         newHtml = "<iframe src=\"" + data.data[i].embed_url + "\"></iframe> <p>Disclaimer: this may or may not be the correct pokemon gif. We are not responsible for what shows up.</p>"
         $("#giphy").html(newHtml);
     })
