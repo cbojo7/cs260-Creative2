@@ -24,3 +24,7 @@ function unlockMarket() {
     $("body").attr("style","background-image: url(\"images/Rocket-img2.png\");background-size: 100%;")
     calcPrice();
 }
+
+function blastOff() {
+    alert("Thank you for your purchase! \nTeam Rocket is Blasting off again!")
+}

@@ -91,6 +91,21 @@ $(document).ready(function() {
                                 output += getEvolutions(curData);
                                 output += "</ul></div>";
                                 $("#stats").html(output);
+                                
+                                //make the divs collabsibla and expandible.
+                                var coll = document.getElementsByClassName("collapsible");
+                                var i;
+                                for (i = 0; i < coll.length; i++) {
+                                coll[i].addEventListener("click", function() {
+                                    this.classList.toggle("active");
+                                    var content = this.nextElementSibling;
+                                    if (content.style.maxHeight){
+                                    content.style.maxHeight = null;
+                                    } else {
+                                    content.style.maxHeight = content.scrollHeight + "px";
+                                    } 
+                                });
+                                }
                             },
                             error: function (e) {
                                 output+= "<li>Error, evolutions not found.</li></ul>";
@@ -98,7 +113,7 @@ $(document).ready(function() {
                         })
                     },
                     error: function(e) {
-                        output+= "<li>Error, evolutions not found.</li></ul>";
+                        output+= "<li>Error, stats not found.</li></ul>";
                     }
                 })
             },
@@ -155,19 +170,19 @@ function calcPrice() {
         })
     }
 }
-function collectionButton() {
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+// function collectionButton() {
+//     var coll = document.getElementsByClassName("collapsible");
+//     var i;
     
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight){
-          content.style.maxHeight = null;
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-        } 
-      });
-    }
-}
+//     for (i = 0; i < coll.length; i++) {
+//       coll[i].addEventListener("click", function() {
+//         this.classList.toggle("active");
+//         var content = this.nextElementSibling;
+//         if (content.style.maxHeight){
+//           content.style.maxHeight = null;
+//         } else {
+//           content.style.maxHeight = content.scrollHeight + "px";
+//         } 
+//       });
+//     }
+// }
